@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YYZ Deal Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F5F2EB; --bg2: #EDEAE1; --surface: #FDFCF9;
+  --border: #D8D3C8; --border2: #C4BEB0;
+  --text: #1A1814; --text2: #6B6559; --text3: #9A9389;
+  --accent: #C84B2F; --accent2: #E8916A;
+  --green: #2A6B3C; --green-bg: #E8F2EB;
+  --blue: #1D4E8A; --blue-bg: #E5EDF7;
+  --amber: #8A5A1A; --amber-bg: #FBF0DC;
+  --red: #A32D1A; --red-bg: #FAEAE7;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-mono: 'DM Mono', monospace;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-mono); font-size: 13px; min-height: 100vh; }
+
+/* HEADER */
+.site-header { background: var(--text); color: var(--bg); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; }
+.site-logo { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+.site-logo span { color: var(--accent2); font-style: italic; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.live-badge { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #6FCF97; }
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: #6FCF97; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+.hdr-btn { font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; background: transparent; border: 1px solid #444; color: #9A9389; cursor: pointer; transition: all 0.15s; }
+.hdr-btn:hover { border-color: #888; color: var(--bg); }
+.hdr-btn.active { border-color: #6FCF97; color: #6FCF97; }
+
+/* PANELS */
+.panel { max-width: 960px; margin: 0 auto; padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); display: none; }
+.panel.visible { display: block; }
+.panel-amber { background: var(--amber-bg); border-bottom-color: #DFC898; }
+.panel-blue  { background: var(--blue-bg);  border-bottom-color: #B5D4F4; }
+.panel-title { font-size: 12px; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.03em; }
+.panel-amber .panel-title { color: var(--amber); }
+.panel-blue  .panel-title { color: var(--blue); }
+.panel-desc { font-size: 11px; color: var(--text2); margin-bottom: 12px; line-height: 1.7; }
+.key-input-row { display: flex; gap: 8px; }
+.key-input { font-family: var(--font-mono); font-size: 12px; padding: 8px 12px; border: 1px solid #DFC898; background: var(--surface); color: var(--text); flex: 1; max-width: 380px; outline: none; }
+.key-input:focus { border-color: var(--amber); }
+.key-save-btn { font-family: var(--font-mono); font-size: 12px; padding: 8px 16px; background: var(--amber); color: white; border: none; cursor: pointer; }
+.key-clear-btn { font-family: var(--font-mono); font-size: 12px; padding: 8px 12px; background: transparent; border: 1px solid var(--border2); color: var(--text2); cursor: pointer; }
+.key-status { font-size: 11px; margin-top: 8px; }
+.key-status.ok { color: var(--green); }
+.key-status.warn { color: var(--red); }
+
+/* HERO */
+.hero { padding: 2.5rem 2rem 2rem; max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: end; border-bottom: 1px solid var(--border); }
+.hero-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 52px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; }
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-sub { font-size: 12px; color: var(--text2); margin-top: 0.6rem; line-height: 1.6; max-width: 420px; }
+.hero-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.scan-btn { background: var(--accent); color: white; border: none; font-family: var(--font-mono); font-size: 13px; padding: 12px 24px; cursor: pointer; transition: background 0.15s, transform 0.1s; letter-spacing: 0.03em; white-space: nowrap; }
+.scan-btn:hover { background: #B03D22; }
+.scan-btn:active { transform: scale(0.97); }
+.scan-btn:disabled { background: var(--border2); cursor: not-allowed; }
+.scan-note { font-size: 11px; color: var(--text3); text-align: right; }
+
+/* STATS */
+.stats-bar { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
+.stat { background: var(--bg); padding: 1rem 1.25rem; }
+.stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+.stat-value { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: var(--text); line-height: 1; }
+.stat-value.accent { color: var(--accent); }
+.stat-value.green  { color: var(--green); }
+.stat-value.small  { font-size: 14px; padding-top: 4px; font-family: var(--font-mono); }
+
+/* TABS */
+.tabs { max-width: 960px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+.tab { font-family: var(--font-mono); font-size: 12px; padding: 12px 20px; border: none; background: transparent; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; letter-spacing: 0.02em; margin-bottom: -1px; }
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+/* MAIN */
+.main { max-width: 960px; margin: 0 auto; padding: 1.5rem 2rem 4rem; }
+.section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text3); padding: 0.5rem 0 0.75rem; display: flex; align-items: center; gap: 10px; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* WATCHLIST CARDS */
+.watchlist-grid { display: flex; flex-direction: column; gap: 0; }
+.route-card { background: var(--surface); border: 1px solid var(--border); border-top: none; display: grid; grid-template-columns: 1fr auto; gap: 0; transition: background 0.12s; }
+.watchlist-grid .route-card:first-child { border-top: 1px solid var(--border); }
+.route-card:hover { background: #FDFCF7; }
+.route-card-left { padding: 1.25rem 1.5rem; }
+.route-name { font-family: var(--font-display); font-size: 20px; font-weight: 300; letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 3px; }
+.route-sub { font-size: 11px; color: var(--text3); letter-spacing: 0.02em; margin-bottom: 10px; }
+.route-meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tag { font-size: 10px; padding: 3px 8px; letter-spacing: 0.04em; text-transform: uppercase; }
+.tag.nonstop  { background: var(--green-bg); color: var(--green);  border: 1px solid #B8DAC2; }
+.tag.domestic { background: var(--blue-bg);  color: var(--blue);   border: 1px solid #B5D4F4; }
+.tag.longhaul { background: var(--amber-bg); color: var(--amber);  border: 1px solid #DFC898; }
+.tag.crossborder { background: #F3ECF8; color: #6B3A8A; border: 1px solid #D4B8E8; }
+.route-links { display: flex; gap: 12px; margin-top: 10px; }
+.route-link { font-size: 11px; color: var(--text2); text-decoration: none; border-bottom: 1px solid var(--border2); padding-bottom: 1px; transition: color 0.12s, border-color 0.12s; }
+.route-link:hover { color: var(--accent); border-color: var(--accent); }
+.route-link.primary { color: var(--accent); border-color: var(--accent2); }
+
+/* PRICE COLUMN */
+.route-card-right { padding: 1.25rem 1.5rem; border-left: 1px solid var(--border); min-width: 200px; display: flex; flex-direction: column; justify-content: center; }
+.price-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.price-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; }
+.price-val { font-family: var(--font-display); font-size: 22px; font-weight: 300; line-height: 1; }
+.price-val.deal    { color: var(--green); }
+.price-val.nodeal  { color: var(--red); }
+.price-val.normal  { color: var(--text); }
+.price-val.faded   { color: var(--text3); font-size: 14px; font-family: var(--font-mono); }
+.price-val.checking { color: var(--text3); font-size: 13px; font-family: var(--font-mono); animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.35} }
+.price-divider { height: 1px; background: var(--border); margin: 10px 0; }
+.deal-status { font-size: 10px; padding: 3px 8px; text-transform: uppercase; letter-spacing: 0.04em; display: inline-block; margin-top: 2px; }
+.deal-status.confirmed { background: var(--green-bg); color: var(--green); }
+.deal-status.expired   { background: var(--red-bg);   color: var(--red); }
+.deal-status.neutral   { background: var(--bg2);       color: var(--text2); }
+.deal-status.waiting   { background: var(--bg2);       color: var(--text3); }
+
+/* BASELINE / HISTORY */
+.baseline-row { margin-top: 8px; }
+.baseline-bar-wrap { height: 4px; background: var(--bg2); border-radius: 2px; margin: 5px 0 4px; overflow: hidden; }
+.baseline-bar { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.6s ease; }
+.baseline-bar.expensive { background: var(--red); }
+.baseline-meta { font-size: 10px; color: var(--text3); }
+.baseline-meta span { color: var(--text2); }
+
+/* HISTORY TAB */
+.history-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.history-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: 400; }
+.history-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.history-table tr:last-child td { border-bottom: none; }
+.history-table td.route-col { color: var(--text); font-family: var(--font-display); font-size: 15px; font-weight: 300; }
+.history-table td.price-col { font-family: var(--font-display); font-size: 17px; font-weight: 300; color: var(--text); }
+.history-table td.price-col.low { color: var(--green); }
+.history-table td.price-col.high { color: var(--red); }
+.spark { display: flex; gap: 2px; align-items: flex-end; height: 24px; }
+.spark-bar { width: 6px; background: var(--border2); border-radius: 1px; transition: background 0.2s; }
+.spark-bar.low { background: var(--green); }
+.spark-bar.high { background: var(--red); }
+.empty-state { text-align: center; padding: 3rem; color: var(--text3); font-size: 12px; line-height: 1.8; }
+.loading-state { text-align: center; padding: 3rem; color: var(--text3); font-size: 12px; }
+.spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--text2); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.info-bar  { background: var(--blue-bg);  border: 1px solid #B5D4F4; color: var(--blue); font-size: 12px; padding: 10px 16px; margin-bottom: 1rem; line-height: 1.6; }
+.error-bar { background: var(--red-bg);   border: 1px solid #EDB8AF; color: var(--red);  font-size: 12px; padding: 10px 16px; margin-bottom: 1rem; }
+.progress-bar-wrap { background: var(--bg2); height: 3px; margin-bottom: 1.5rem; }
+.progress-bar { height: 3px; background: var(--accent); transition: width 0.4s ease; }
+.footer-note { font-size: 11px; color: var(--text3); text-align: center; padding: 2rem 2rem 0; border-top: 1px solid var(--border); max-width: 960px; margin: 2rem auto 0; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-logo">YYZ<span>deals</span>.tracker</div>
+  <div class="header-right">
+    <div class="live-badge"><div class="live-dot"></div> <span id="scanStatus">ready</span></div>
+    <button class="hdr-btn" id="keyToggleBtn" onclick="togglePanel('keyPanel')">⚙ API key</button>
+    <button class="hdr-btn" onclick="togglePanel('infoPanel')">? how it works</button>
+  </div>
+</header>
+
+<!-- KEY PANEL -->
+<div class="panel panel-amber" id="keyPanel">
+  <div class="panel-title">Serpapi key — Google Flights price verification</div>
+  <div class="panel-desc">Your key is stored only in this browser (localStorage) and sent only to Serpapi. Never shared anywhere else.<br>Get a free key at <strong>serpapi.com</strong> — 250 searches/month free. Each scan uses 1 search per route (6 total).</div>
+  <div class="key-input-row">
+    <input class="key-input" type="password" id="keyInput" placeholder="Paste your Serpapi key...">
+    <button class="key-save-btn" onclick="saveKey()">Save</button>
+    <button class="key-clear-btn" onclick="clearKey()">Clear</button>
+  </div>
+  <div class="key-status" id="keyStatus"></div>
+</div>
+
+<!-- INFO PANEL -->
+<div class="panel panel-blue" id="infoPanel">
+  <div class="panel-title">How this tracker works</div>
+  <div class="panel-desc">
+    <strong>Watchlist tab:</strong> Your 6 personal routes. Hit "Scan prices" and it checks each one on Google Flights via Serpapi, logging the result.<br>
+    <strong>Price history tab:</strong> Every scan is saved locally in your browser. Over time this builds a baseline — the app learns what "normal" costs for each route.<br>
+    <strong>Deal detection:</strong> Once you have ~10 data points per route, the app flags prices that are more than 20% below your personal average as a deal.<br>
+    <strong>Budget:</strong> Each full scan uses 6 of your 250 monthly Serpapi searches. Scanning every other day = ~90 searches/month, well within the free tier.<br>
+    <strong>GitHub later:</strong> When you're ready, this same logic moves to a GitHub Action that runs automatically every morning — no file to open.
+  </div>
+</div>
+
+<div class="hero">
+  <div>
+    <h1 class="hero-title">Your personal<br><em>flight watchlist</em></h1>
+    <p class="hero-sub">6 routes you actually want to fly. Scan prices, build a baseline, catch deals when they happen.</p>
+  </div>
+  <div class="hero-actions">
+    <button class="scan-btn" id="scanBtn" onclick="runScan()">↻ Scan prices</button>
+    <span class="scan-note" id="scanNote">Uses 6 of your 250 monthly searches</span>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-label">Routes watched</div><div class="stat-value accent">6</div></div>
+  <div class="stat"><div class="stat-label">Scans logged</div><div class="stat-value" id="s-scans">0</div></div>
+  <div class="stat"><div class="stat-label">Deals found</div><div class="stat-value green" id="s-deals">0</div></div>
+  <div class="stat"><div class="stat-label">Searches used</div><div class="stat-value small" id="s-searches">0 / 250</div></div>
+  <div class="stat"><div class="stat-label">Last scan</div><div class="stat-value small" id="s-lastScan">never</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('watchlist', this)">Watchlist</button>
+  <button class="tab" onclick="switchTab('history', this)">Price history</button>
+</div>
+
+<div class="main">
+  <div id="msgBox"></div>
+  <div id="progressWrap" style="display:none">
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+  </div>
+
+  <!-- WATCHLIST TAB -->
+  <div id="tab-watchlist">
+    <div class="section-label">Your routes</div>
+    <div class="watchlist-grid" id="watchlistGrid"></div>
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div id="tab-history" style="display:none">
+    <div class="section-label">Price log</div>
+    <div id="historyContent"></div>
+  </div>
+</div>
+
+<div class="footer-note">
+  Price data via Google Flights (Serpapi) &nbsp;·&nbsp;
+  Stored locally in your browser &nbsp;·&nbsp;
+  Always verify before booking &nbsp;·&nbsp;
+  Built with Claude
+</div>
+
+<script>
+// ─── WATCHLIST ───────────────────────────────────────────────────────────────
+const WATCHLIST = [
+  {
+    id: 'yyz-tpe',
+    from: 'YYZ', to: 'TPE',
+    name: 'Toronto → Taipei',
+    sub: 'Pearson to Taiwan Taoyuan International',
+    tags: ['longhaul'],
+    normalRange: [900, 1400],
+    gLink: 'https://www.google.ca/travel/flights/search?q=flights+from+Toronto+to+Taipei&curr=CAD'
+  },
+  {
+    id: 'yyz-tyo',
+    from: 'YYZ', to: 'TYO',
+    name: 'Toronto → Tokyo',
+    sub: 'Pearson to Narita / Haneda',
+    tags: ['longhaul'],
+    normalRange: [850, 1350],
+    gLink: 'https://www.google.ca/travel/flights/search?q=flights+from+Toronto+to+Tokyo&curr=CAD'
+  },
+  {
+    id: 'yyz-kix',
+    from: 'YYZ', to: 'KIX',
+    name: 'Toronto → Osaka',
+    sub: 'Pearson to Kansai International',
+    tags: ['longhaul'],
+    normalRange: [850, 1300],
+    gLink: 'https://www.google.ca/travel/flights/search?q=flights+from+Toronto+to+Osaka&curr=CAD'
+  },
+  {
+    id: 'yyz-yvr',
+    from: 'YYZ', to: 'YVR',
+    name: 'Toronto → Vancouver',
+    sub: 'Pearson to Vancouver International',
+    tags: ['domestic'],
+    normalRange: [280, 550],
+    gLink: 'https://www.google.ca/travel/flights/search?q=flights+from+Toronto+to+Vancouver&curr=CAD'
+  },
+  {
+    id: 'yyz-sea',
+    from: 'YYZ', to: 'SEA',
+    name: 'Toronto → Seattle',
+    sub: 'Pearson to Seattle-Tacoma',
+    tags: ['domestic'],
+    normalRange: [250, 480],
+    gLink: 'https://www.google.ca/travel/flights/search?q=flights+from+Toronto+to+Seattle&curr=CAD'
+  },
+  {
+    id: 'buf-sea',
+    from: 'BUF', to: 'SEA',
+    name: 'Buffalo → Seattle',
+    sub: 'Cross-border — drive to Buffalo, fly US domestic',
+    tags: ['crossborder'],
+    normalRange: [120, 320],
+    gLink: 'https://www.google.ca/travel/flights/search?q=flights+from+Buffalo+to+Seattle&curr=CAD'
+  }
+];
+
+// ─── STORAGE KEYS ────────────────────────────────────────────────────────────
+const SK_KEY      = 'yyzt_serpapi_key';
+const SK_LOG      = 'yyzt_price_log_v3';
+const SK_SEARCHES = 'yyzt_search_count';
+const SK_LASTSCAN = 'yyzt_last_scan';
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let priceLog    = JSON.parse(localStorage.getItem(SK_LOG)      || '{}');
+let searchCount = parseInt(localStorage.getItem(SK_SEARCHES)   || '0');
+let lastScan    = localStorage.getItem(SK_LASTSCAN)            || null;
+let liveResults = {};   // id → { price, ts }
+let scanning    = false;
+let currentTab  = 'watchlist';
+
+// ─── KEY ─────────────────────────────────────────────────────────────────────
+function getKey() { return localStorage.getItem(SK_KEY) || ''; }
+function hasKey() { return !!getKey(); }
+
+function togglePanel(id) {
+  ['keyPanel','infoPanel'].forEach(pid => {
+    const el = document.getElementById(pid);
+    if (pid === id) el.classList.toggle('visible');
+    else el.classList.remove('visible');
+  });
+  if (id === 'keyPanel') {
+    const k = getKey();
+    if (k) document.getElementById('keyInput').value = k;
+    updateKeyStatus();
+  }
+}
+
+function saveKey() {
+  const val = document.getElementById('keyInput').value.trim();
+  if (!val) return;
+  localStorage.setItem(SK_KEY, val);
+  document.getElementById('keyPanel').classList.remove('visible');
+  document.getElementById('keyToggleBtn').classList.add('active');
+  updateKeyStatus();
+  showMsg('info', 'Key saved. Hit "Scan prices" to verify your routes.');
+}
+
+function clearKey() {
+  localStorage.removeItem(SK_KEY);
+  document.getElementById('keyInput').value = '';
+  document.getElementById('keyToggleBtn').classList.remove('active');
+  updateKeyStatus();
+}
+
+function updateKeyStatus() {
+  const el = document.getElementById('keyStatus');
+  if (hasKey()) {
+    el.className = 'key-status ok';
+    el.textContent = '✓ Key saved — price verification enabled';
+    document.getElementById('keyToggleBtn').classList.add('active');
+  } else {
+    el.className = 'key-status warn';
+    el.textContent = 'No key — add one to enable live price checks';
+  }
+}
+
+// ─── PRICE LOG ───────────────────────────────────────────────────────────────
+function logPrice(id, price) {
+  if (!priceLog[id]) priceLog[id] = [];
+  const today = new Date().toISOString().split('T')[0];
+  // Don't double-log same day
+  if (priceLog[id].length && priceLog[id][priceLog[id].length-1].date === today) {
+    priceLog[id][priceLog[id].length-1].price = price;
+  } else {
+    priceLog[id].push({ price, date: today });
+  }
+  if (priceLog[id].length > 60) priceLog[id].shift();
+  localStorage.setItem(SK_LOG, JSON.stringify(priceLog));
+}
+
+function getStats(id) {
+  const entries = priceLog[id];
+  if (!entries || entries.length < 2) return null;
+  const prices = entries.map(e => e.price);
+  const avg    = Math.round(prices.reduce((a,b) => a+b, 0) / prices.length);
+  const min    = Math.min(...prices);
+  const max    = Math.max(...prices);
+  return { avg, min, max, count: entries.length, entries };
+}
+
+function isDeal(id, price) {
+  const stats = getStats(id);
+  if (!stats || stats.count < 5) return null; // need enough data
+  return price <= stats.avg * 0.80; // 20% below average = deal
+}
+
+// ─── SERPAPI ─────────────────────────────────────────────────────────────────
+function getSearchDate(offsetMonths) {
+  const d = new Date();
+  d.setMonth(d.getMonth() + offsetMonths);
+  return d.toISOString().split('T')[0];
+}
+
+async function fetchPrice(route) {
+  const key = getKey();
+  const params = new URLSearchParams({
+    engine:         'google_flights',
+    departure_id:   route.from,
+    arrival_id:     route.to,
+    outbound_date:  getSearchDate(1),
+    return_date:    getSearchDate(2),
+    currency:       'CAD',
+    hl:             'en',
+    api_key:        key
+  });
+
+  const res  = await fetch(`https://serpapi.com/search.json?${params}`);
+  const data = await res.json();
+
+  if (data.error) throw new Error(data.error);
+
+  const flights = [...(data.best_flights || []), ...(data.other_flights || [])];
+  let lowest = null;
+  for (const f of flights) {
+    if (f.price && (!lowest || f.price < lowest)) lowest = f.price;
+  }
+  if (data.price_insights?.lowest_price) {
+    const pi = data.price_insights.lowest_price;
+    if (!lowest || pi < lowest) lowest = pi;
+  }
+  return lowest;
+}
+
+// ─── SCAN ────────────────────────────────────────────────────────────────────
+async function runScan() {
+  if (!hasKey()) {
+    togglePanel('keyPanel');
+    return;
+  }
+  if (scanning) return;
+  scanning = true;
+
+  document.getElementById('scanBtn').disabled = true;
+  document.getElementById('scanBtn').textContent = 'Scanning...';
+  document.getElementById('progressWrap').style.display = 'block';
+  document.getElementById('progressBar').style.width = '0%';
+  setStatus('scanning routes...');
+  clearMsg();
+
+  let done = 0;
+  let dealsFound = 0;
+
+  for (const route of WATCHLIST) {
+    liveResults[route.id] = { state: 'checking' };
+    renderWatchlist();
+
+    try {
+      const price = await fetchPrice(route);
+      searchCount++;
+      localStorage.setItem(SK_SEARCHES, searchCount);
+
+      if (price) {
+        logPrice(route.id, price);
+        const deal = isDeal(route.id, price);
+        liveResults[route.id] = { state: 'done', price, deal };
+        if (deal === true) dealsFound++;
+      } else {
+        liveResults[route.id] = { state: 'no-data' };
+      }
+    } catch(e) {
+      liveResults[route.id] = { state: 'error', msg: e.message };
+    }
+
+    done++;
+    document.getElementById('progressBar').style.width = Math.round((done / WATCHLIST.length) * 100) + '%';
+    renderWatchlist();
+    renderStats();
+    if (currentTab === 'history') renderHistory();
+
+    await new Promise(r => setTimeout(r, 600));
+  }
+
+  lastScan = new Date().toISOString();
+  localStorage.setItem(SK_LASTSCAN, lastScan);
+
+  scanning = false;
+  document.getElementById('scanBtn').disabled = false;
+  document.getElementById('scanBtn').textContent = '↻ Scan prices';
+  setTimeout(() => { document.getElementById('progressWrap').style.display = 'none'; }, 1000);
+  setStatus('ready');
+  renderStats();
+
+  if (dealsFound > 0) {
+    showMsg('info', `Scan complete — ${dealsFound} potential deal${dealsFound > 1 ? 's' : ''} found! Look for the green "deal" badges below.`);
+  } else {
+    showMsg('info', 'Scan complete. Prices logged. No deals vs your baseline yet — keep scanning to build the average!');
+  }
+}
+
+// ─── RENDER WATCHLIST ────────────────────────────────────────────────────────
+function renderWatchlist() {
+  const grid = document.getElementById('watchlistGrid');
+  grid.innerHTML = WATCHLIST.map(route => {
+    const result = liveResults[route.id];
+    const stats  = getStats(route.id);
+    const tagHtml = route.tags.map(t => `<span class="tag ${t}">${t === 'longhaul' ? 'long haul' : t === 'crossborder' ? 'cross-border' : t}</span>`).join('');
+
+    // Price column
+    let priceHtml = '';
+    if (!result) {
+      priceHtml = `
+        <div class="price-row">
+          <span class="price-label">Current price</span>
+          <span class="price-val faded">${hasKey() ? '—' : 'no key'}</span>
+        </div>
+        <div class="price-divider"></div>
+        <div class="price-row">
+          <span class="price-label">Your avg</span>
+          <span class="price-val faded">${stats ? '$'+stats.avg : '—'}</span>
+        </div>
+        <div style="margin-top:8px">
+          <span class="deal-status waiting">${stats ? stats.count + ' data points' : 'no data yet'}</span>
+        </div>`;
+    } else if (result.state === 'checking') {
+      priceHtml = `
+        <div class="price-row">
+          <span class="price-label">Current price</span>
+          <span class="price-val checking">checking...</span>
+        </div>
+        <div class="price-divider"></div>
+        <div class="price-row">
+          <span class="price-label">Your avg</span>
+          <span class="price-val faded">${stats ? '$'+stats.avg : '—'}</span>
+        </div>`;
+    } else if (result.state === 'done' && result.price) {
+      const deal   = result.deal;
+      const priceCls = deal === true ? 'deal' : deal === false ? 'nodeal' : 'normal';
+      const avgDiff  = stats ? Math.round(((result.price - stats.avg) / stats.avg) * 100) : null;
+      const pct      = avgDiff !== null ? (avgDiff > 0 ? '+' : '') + avgDiff + '% vs avg' : '';
+
+      // Baseline bar — how does today's price compare to normal range
+      let barHtml = '';
+      const [lo, hi] = route.normalRange;
+      const barPct = Math.min(100, Math.max(5, Math.round(((result.price - lo) / (hi - lo)) * 100)));
+      const barCls = result.price <= lo * 1.1 ? 'low' : result.price >= hi * 0.9 ? 'expensive' : '';
+      barHtml = `
+        <div class="baseline-row">
+          <div class="baseline-bar-wrap"><div class="baseline-bar ${barCls}" style="width:${barPct}%"></div></div>
+          <div class="baseline-meta">Expected range: <span>$${lo}–$${hi}</span></div>
+        </div>`;
+
+      priceHtml = `
+        <div class="price-row">
+          <span class="price-label">Current price</span>
+          <span class="price-val ${priceCls}">$${result.price}</span>
+        </div>
+        <div class="price-divider"></div>
+        <div class="price-row">
+          <span class="price-label">Your avg</span>
+          <span class="price-val faded">${stats ? '$'+stats.avg : '—'}</span>
+        </div>
+        ${barHtml}
+        <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+          ${deal === true  ? '<span class="deal-status confirmed">deal — book it</span>' : ''}
+          ${deal === false ? `<span class="deal-status expired">above avg ${pct}</span>` : ''}
+          ${deal === null  ? `<span class="deal-status neutral">${stats ? pct : 'building baseline'}</span>` : ''}
+        </div>`;
+    } else {
+      priceHtml = `
+        <div class="price-row"><span class="price-label">Current price</span><span class="price-val faded">—</span></div>
+        <div style="margin-top:8px"><span class="deal-status neutral">${result.state === 'error' ? 'API error' : 'no data'}</span></div>`;
+    }
+
+    return `
+    <div class="route-card">
+      <div class="route-card-left">
+        <div class="route-name">${route.name}</div>
+        <div class="route-sub">${route.sub}</div>
+        <div class="route-meta">${tagHtml}</div>
+        <div class="route-links">
+          <a class="route-link primary" href="${route.gLink}" target="_blank">Open Google Flights ↗</a>
+        </div>
+      </div>
+      <div class="route-card-right">${priceHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── RENDER HISTORY ──────────────────────────────────────────────────────────
+function renderHistory() {
+  const el = document.getElementById('historyContent');
+  const hasAny = WATCHLIST.some(r => priceLog[r.id] && priceLog[r.id].length);
+
+  if (!hasAny) {
+    el.innerHTML = '<div class="empty-state">No price history yet.<br>Run your first scan to start building the baseline.</div>';
+    return;
+  }
+
+  let html = '<table class="history-table"><thead><tr><th>Route</th><th>Latest</th><th>Average</th><th>Low</th><th>High</th><th>Checks</th><th>Trend</th></tr></thead><tbody>';
+
+  for (const route of WATCHLIST) {
+    const entries = priceLog[route.id];
+    if (!entries || !entries.length) continue;
+    const stats = getStats(route.id);
+    const latest = entries[entries.length - 1];
+    const latestCls = stats && latest.price <= stats.avg * 0.80 ? 'low' : stats && latest.price >= stats.avg * 1.20 ? 'high' : '';
+
+    // Sparkline
+    const sparkPrices = entries.slice(-10).map(e => e.price);
+    const spMin = Math.min(...sparkPrices);
+    const spMax = Math.max(...sparkPrices);
+    const spRange = spMax - spMin || 1;
+    const sparkBars = sparkPrices.map(p => {
+      const h = Math.max(3, Math.round(((p - spMin) / spRange) * 20) + 3);
+      const cls = p <= spMin * 1.05 ? 'low' : p >= spMax * 0.95 ? 'high' : '';
+      return `<div class="spark-bar ${cls}" style="height:${h}px"></div>`;
+    }).join('');
+
+    html += `
+      <tr>
+        <td class="route-col">${route.name}</td>
+        <td class="price-col ${latestCls}">$${latest.price}<br><span style="font-size:10px;font-family:var(--font-mono);color:var(--text3)">${latest.date}</span></td>
+        <td class="price-col">${stats ? '$'+stats.avg : '—'}</td>
+        <td class="price-col low">${stats ? '$'+stats.min : '—'}</td>
+        <td class="price-col high">${stats ? '$'+stats.max : '—'}</td>
+        <td>${entries.length}</td>
+        <td><div class="spark">${sparkBars}</div></td>
+      </tr>`;
+  }
+
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+// ─── STATS BAR ───────────────────────────────────────────────────────────────
+function renderStats() {
+  const totalScans = Math.max(...WATCHLIST.map(r => (priceLog[r.id] || []).length), 0);
+  const deals = WATCHLIST.filter(r => {
+    const res = liveResults[r.id];
+    return res && res.deal === true;
+  }).length;
+
+  document.getElementById('s-scans').textContent    = totalScans;
+  document.getElementById('s-deals').textContent    = deals;
+  document.getElementById('s-searches').textContent = searchCount + ' / 250';
+  document.getElementById('s-lastScan').textContent = lastScan
+    ? new Date(lastScan).toLocaleDateString('en-CA', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})
+    : 'never';
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-watchlist').style.display = tab === 'watchlist' ? 'block' : 'none';
+  document.getElementById('tab-history').style.display   = tab === 'history'   ? 'block' : 'none';
+  if (tab === 'history') renderHistory();
+}
+
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+function setStatus(msg) { document.getElementById('scanStatus').textContent = msg; }
+function showMsg(type, msg) { document.getElementById('msgBox').innerHTML = `<div class="${type}-bar">${msg}</div>`; }
+function clearMsg() { document.getElementById('msgBox').innerHTML = ''; }
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+updateKeyStatus();
+renderWatchlist();
+renderStats();
+
+if (!hasKey()) {
+  showMsg('info', 'Welcome! Add your <strong>Serpapi key</strong> (⚙ button, top right) to enable live Google Flights price checks. Then hit "Scan prices" to get started.');
+}
+</script>
+</body>
+</html>
