@@ -1,0 +1,33 @@
+name: Daily price scan
+
+on:
+  schedule:
+    - cron: '0 13 * * *'  # runs 8am Toronto time every day
+  workflow_dispatch:        # also lets you run it manually
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install node-fetch
+
+      - name: Run price scan
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: node scan.js
+
+      - name: Save price log
+        run: |
+          git config user.name "yyz-tracker"
+          git config user.email "tracker@users.noreply.github.com"
+          git add price-log.json
+          git diff --staged --quiet || git commit -m "price scan $(date +%Y-%m-%d)"
+          git push
