@@ -2,31 +2,31 @@
   "yyz-tpe": [
     {
       "date": "2026-04-24",
-      "price": 1917
+      "price": 1891
     }
   ],
   "yyz-kix": [
     {
       "date": "2026-04-24",
-      "price": 2122
+      "price": 2069
     }
   ],
   "yyz-yvr": [
     {
       "date": "2026-04-24",
-      "price": 411
+      "price": 424
     }
   ],
   "yyz-sea": [
     {
       "date": "2026-04-24",
-      "price": 635
+      "price": 626
     }
   ],
   "buf-sea": [
     {
       "date": "2026-04-24",
-      "price": 653
+      "price": 717
     }
   ]
 }
