@@ -2,7 +2,7 @@ name: Daily price scan
 
 on:
   schedule:
-    - cron: '0 13 * * *'  # runs 8am Toronto time every day
+    - cron: '0 13 * * 1'  # runs 8am Toronto time every day
   workflow_dispatch:        # also lets you run it manually
 
 jobs:
