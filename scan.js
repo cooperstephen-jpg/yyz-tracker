@@ -5,11 +5,11 @@ const SERPAPI_KEY = process.env.SERPAPI_KEY;
 
 const WATCHLIST = [
   { id: 'yyz-tpe', from: 'YYZ', to: 'TPE', name: 'Toronto → Taipei' },
-  { id: 'yyz-tyo', from: 'YYZ', to: 'TYO', name: 'Toronto → Tokyo' },
+  { id: 'yyz-nrt', from: 'YYZ', to: 'NRT', name: 'Toronto → Tokyo (Narita)' },
   { id: 'yyz-kix', from: 'YYZ', to: 'KIX', name: 'Toronto → Osaka' },
   { id: 'yyz-yvr', from: 'YYZ', to: 'YVR', name: 'Toronto → Vancouver' },
-  { id: 'yyz-sea', from: 'YYZ', to: 'SEA', name: 'Toronto → Seattle' },
-  { id: 'buf-sea', from: 'BUF', to: 'SEA', name: 'Buffalo → Seattle' },
+  { id: 'yyz-sea', from: 'YYZ', to: 'USEA', name: 'Toronto → Seattle' },
+  { id: 'buf-sea', from: 'UBUF', to: 'USEA', name: 'Buffalo → Seattle' },
 ];
 
 function getDate(offsetMonths) {
