@@ -297,9 +297,9 @@ function renderOverview(){
           <span class="top-month-price rank-${rank}">$${m.now}</span>
         </div>
         <div class="price-trio">
-          <div class="price-trio-item"><div class="trio-label">Now</div><div class="trio-value ${nowCls}">$${m.now}</div>${m.nowDate?`<div class="trio-sub">${m.nowDate}</div>`:''}</div>
+          <div class="price-trio-item"><div class="trio-label">Now</div><div class="trio-value ${nowCls}">$${m.now}</div></div>
           <div class="price-trio-item"><div class="trio-label">Avg</div><div class="trio-value">${m.scanAvg?'$'+m.scanAvg:'--'}</div><div class="trio-sub">${m.scansCount} scan${m.scansCount>1?'s':''}</div></div>
-          <div class="price-trio-item"><div class="trio-label">Best ever</div><div class="trio-value best">$${m.bestEver}</div>${m.bestEverDate?`<div class="trio-sub green">${m.bestEverDate}</div>`:''}</div>
+          <div class="price-trio-item"><div class="trio-label">Best ever</div><div class="trio-value best">$${m.bestEver}</div></div>
         </div>
       </div>`;
     }).join(''):`<div class="no-data-card">No data yet</div>`;
@@ -324,7 +324,7 @@ function renderTable(){
       const stats=getMonthStats(route.id,month);
       const tier=getCellTier(route.id,month,allMonths);
       if(!stats){html+=`<td><div class="month-cell no-data"><div class="mc-now" style="color:var(--text3);font-size:12px">--</div></div></td>`;}
-      else{html+=`<td><div class="month-cell ${tier}"><div class="mc-now">$${stats.now}</div>${stats.nowDate?`<div class="mc-meta"><span class="best-day">${stats.nowDate}</span></div>`:''}<div class="mc-meta">avg $${stats.scanAvg||stats.now}</div>${tier==='best'?'<div class="best-badge">best</div>':''}</div></td>`;}
+      else{html+=`<td><div class="month-cell ${tier}"><div class="mc-now">$${stats.now}</div><div class="mc-meta">avg $${stats.scanAvg||stats.now}</div>${tier==='best'?'<div class="best-badge">best</div>':''}</div></td>`;}
     });
     html+='</tr>';
   });
@@ -351,7 +351,7 @@ function renderHistory(){
       return`<div class="history-month-card">
         <div class="history-month-name">${month}</div>
         <div class="history-month-now ${cls}">$${stats.now}</div>
-        <div class="history-month-detail">avg <span>$${stats.scanAvg||stats.now}</span><br>best <span class="green">$${stats.bestEver}</span>${stats.bestEverDate?' <span>'+stats.bestEverDate+'</span>':''}</div>
+        <div class="history-month-detail">avg <span>$${stats.scanAvg||stats.now}</span><br>best <span class="green">$${stats.bestEver}</span></div>
         <div class="history-month-detail">${stats.scansCount} scan${stats.scansCount>1?'s':''}</div>
         ${prices.length>1?`<div class="spark">${spark}</div>`:''}
       </div>`;
