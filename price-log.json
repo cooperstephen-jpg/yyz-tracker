@@ -390,13 +390,6 @@
     ],
     "October 2026": [
       {
-        "scanDate": "2026-05-04",
-        "latestPrice": 1042,
-        "cheapestDate": 1773892800,
-        "scanAvg": 1420,
-        "dataPoints": 62
-      },
-      {
         "scanDate": "2026-05-11",
         "latestPrice": 1042,
         "cheapestDate": 1773892800,
@@ -528,16 +521,16 @@
         "cheapestDate": 1785211200,
         "scanAvg": 1477,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1432,
+        "cheapestDate": 1785211200,
+        "scanAvg": 1473,
+        "dataPoints": 61
       }
     ],
     "November 2026": [
-      {
-        "scanDate": "2026-05-04",
-        "latestPrice": 1388,
-        "cheapestDate": 1773115200,
-        "scanAvg": 1507,
-        "dataPoints": 62
-      },
       {
         "scanDate": "2026-05-11",
         "latestPrice": 1388,
@@ -670,6 +663,13 @@
         "cheapestDate": 1784692800,
         "scanAvg": 1495,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1460,
+        "cheapestDate": 1784779200,
+        "scanAvg": 1494,
+        "dataPoints": 61
       }
     ],
     "December 2026": [
@@ -784,6 +784,13 @@
         "cheapestDate": 1788235200,
         "scanAvg": 1471,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1414,
+        "cheapestDate": 1788235200,
+        "scanAvg": 1463,
+        "dataPoints": 61
       }
     ],
     "January 2027": [
@@ -863,6 +870,13 @@
         "cheapestDate": 1788667200,
         "scanAvg": 1667,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1585,
+        "cheapestDate": 1788667200,
+        "scanAvg": 1672,
+        "dataPoints": 61
       }
     ],
     "February 2027": [
@@ -914,6 +928,13 @@
         "cheapestDate": 1787976000,
         "scanAvg": 1461,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1423,
+        "cheapestDate": 1787976000,
+        "scanAvg": 1449,
+        "dataPoints": 61
       }
     ],
     "March 2027": [
@@ -929,6 +950,13 @@
         "latestPrice": 1212,
         "cheapestDate": 1789012800,
         "scanAvg": 1436,
+        "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1212,
+        "cheapestDate": 1789012800,
+        "scanAvg": 1419,
         "dataPoints": 61
       }
     ]
@@ -1324,13 +1352,6 @@
     ],
     "October 2026": [
       {
-        "scanDate": "2026-05-04",
-        "latestPrice": 1191,
-        "cheapestDate": 1772600400,
-        "scanAvg": 1474,
-        "dataPoints": 62
-      },
-      {
         "scanDate": "2026-05-11",
         "latestPrice": 1360,
         "cheapestDate": 1775016000,
@@ -1462,16 +1483,16 @@
         "cheapestDate": 1784865600,
         "scanAvg": 1619,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1282,
+        "cheapestDate": 1784865600,
+        "scanAvg": 1653,
+        "dataPoints": 61
       }
     ],
     "November 2026": [
-      {
-        "scanDate": "2026-05-04",
-        "latestPrice": 1142,
-        "cheapestDate": 1772600400,
-        "scanAvg": 1460,
-        "dataPoints": 62
-      },
       {
         "scanDate": "2026-05-11",
         "latestPrice": 1241,
@@ -1604,6 +1625,13 @@
         "cheapestDate": 1785988800,
         "scanAvg": 1695,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1422,
+        "cheapestDate": 1785988800,
+        "scanAvg": 1698,
+        "dataPoints": 61
       }
     ],
     "December 2026": [
@@ -1718,6 +1746,13 @@
         "cheapestDate": 1788840000,
         "scanAvg": 1365,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1118,
+        "cheapestDate": 1788840000,
+        "scanAvg": 1329,
+        "dataPoints": 61
       }
     ],
     "January 2027": [
@@ -1797,6 +1832,13 @@
         "cheapestDate": 1789185600,
         "scanAvg": 1423,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1203,
+        "cheapestDate": 1789963200,
+        "scanAvg": 1377,
+        "dataPoints": 61
       }
     ],
     "February 2027": [
@@ -1848,6 +1890,13 @@
         "cheapestDate": 1788840000,
         "scanAvg": 1206,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1033,
+        "cheapestDate": 1788840000,
+        "scanAvg": 1162,
+        "dataPoints": 61
       }
     ],
     "March 2027": [
@@ -1863,6 +1912,13 @@
         "latestPrice": 1374,
         "cheapestDate": 1784174400,
         "scanAvg": 1693,
+        "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1515,
+        "cheapestDate": 1786507200,
+        "scanAvg": 1738,
         "dataPoints": 61
       }
     ]
@@ -2258,13 +2314,6 @@
     ],
     "October 2026": [
       {
-        "scanDate": "2026-05-04",
-        "latestPrice": 1201,
-        "cheapestDate": 1772600400,
-        "scanAvg": 1453,
-        "dataPoints": 62
-      },
-      {
         "scanDate": "2026-05-11",
         "latestPrice": 1312,
         "cheapestDate": 1773201600,
@@ -2396,16 +2445,16 @@
         "cheapestDate": 1788840000,
         "scanAvg": 1776,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1486,
+        "cheapestDate": 1788840000,
+        "scanAvg": 1750,
+        "dataPoints": 61
       }
     ],
     "November 2026": [
-      {
-        "scanDate": "2026-05-04",
-        "latestPrice": 1245,
-        "cheapestDate": 1772686800,
-        "scanAvg": 1548,
-        "dataPoints": 61
-      },
       {
         "scanDate": "2026-05-11",
         "latestPrice": 1375,
@@ -2538,6 +2587,13 @@
         "cheapestDate": 1788235200,
         "scanAvg": 1936,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1666,
+        "cheapestDate": 1788235200,
+        "scanAvg": 1906,
+        "dataPoints": 61
       }
     ],
     "December 2026": [
@@ -2652,6 +2708,13 @@
         "cheapestDate": 1788148800,
         "scanAvg": 1576,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1250,
+        "cheapestDate": 1788148800,
+        "scanAvg": 1573,
+        "dataPoints": 61
       }
     ],
     "January 2027": [
@@ -2731,6 +2794,13 @@
         "cheapestDate": 1788840000,
         "scanAvg": 1859,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1704,
+        "cheapestDate": 1788840000,
+        "scanAvg": 1845,
+        "dataPoints": 61
       }
     ],
     "February 2027": [
@@ -2782,6 +2852,13 @@
         "cheapestDate": 1788235200,
         "scanAvg": 1758,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1434,
+        "cheapestDate": 1788235200,
+        "scanAvg": 1730,
+        "dataPoints": 61
       }
     ],
     "March 2027": [
@@ -2797,6 +2874,13 @@
         "latestPrice": 1615,
         "cheapestDate": 1788840000,
         "scanAvg": 1751,
+        "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 1615,
+        "cheapestDate": 1788840000,
+        "scanAvg": 1733,
         "dataPoints": 61
       }
     ]
@@ -3192,13 +3276,6 @@
     ],
     "October 2026": [
       {
-        "scanDate": "2026-05-04",
-        "latestPrice": 348,
-        "cheapestDate": 1773201600,
-        "scanAvg": 430,
-        "dataPoints": 62
-      },
-      {
         "scanDate": "2026-05-11",
         "latestPrice": 348,
         "cheapestDate": 1773201600,
@@ -3330,16 +3407,16 @@
         "cheapestDate": 1785988800,
         "scanAvg": 324,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 283,
+        "cheapestDate": 1785988800,
+        "scanAvg": 326,
+        "dataPoints": 61
       }
     ],
     "November 2026": [
-      {
-        "scanDate": "2026-05-04",
-        "latestPrice": 422,
-        "cheapestDate": 1772686800,
-        "scanAvg": 480,
-        "dataPoints": 62
-      },
       {
         "scanDate": "2026-05-11",
         "latestPrice": 422,
@@ -3472,6 +3549,13 @@
         "cheapestDate": 1787889600,
         "scanAvg": 344,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 308,
+        "cheapestDate": 1787889600,
+        "scanAvg": 335,
+        "dataPoints": 61
       }
     ],
     "December 2026": [
@@ -3586,6 +3670,13 @@
         "cheapestDate": 1788148800,
         "scanAvg": 350,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 314,
+        "cheapestDate": 1789444800,
+        "scanAvg": 341,
+        "dataPoints": 61
       }
     ],
     "January 2027": [
@@ -3665,6 +3756,13 @@
         "cheapestDate": 1784779200,
         "scanAvg": 524,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 471,
+        "cheapestDate": 1784779200,
+        "scanAvg": 531,
+        "dataPoints": 61
       }
     ],
     "February 2027": [
@@ -3716,6 +3814,13 @@
         "cheapestDate": 1788580800,
         "scanAvg": 420,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 384,
+        "cheapestDate": 1788580800,
+        "scanAvg": 414,
+        "dataPoints": 61
       }
     ],
     "March 2027": [
@@ -3731,6 +3836,13 @@
         "latestPrice": 373,
         "cheapestDate": 1788840000,
         "scanAvg": 434,
+        "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 373,
+        "cheapestDate": 1788840000,
+        "scanAvg": 423,
         "dataPoints": 61
       }
     ]
@@ -4126,13 +4238,6 @@
     ],
     "October 2026": [
       {
-        "scanDate": "2026-05-04",
-        "latestPrice": 371,
-        "cheapestDate": 1776744000,
-        "scanAvg": 482,
-        "dataPoints": 62
-      },
-      {
         "scanDate": "2026-05-11",
         "latestPrice": 371,
         "cheapestDate": 1776744000,
@@ -4264,16 +4369,16 @@
         "cheapestDate": 1788926400,
         "scanAvg": 509,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 401,
+        "cheapestDate": 1788926400,
+        "scanAvg": 546,
+        "dataPoints": 61
       }
     ],
     "November 2026": [
-      {
-        "scanDate": "2026-05-04",
-        "latestPrice": 474,
-        "cheapestDate": 1774929600,
-        "scanAvg": 529,
-        "dataPoints": 62
-      },
       {
         "scanDate": "2026-05-11",
         "latestPrice": 474,
@@ -4406,6 +4511,13 @@
         "cheapestDate": 1788926400,
         "scanAvg": 601,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 516,
+        "cheapestDate": 1788926400,
+        "scanAvg": 611,
+        "dataPoints": 61
       }
     ],
     "December 2026": [
@@ -4520,6 +4632,13 @@
         "cheapestDate": 1788926400,
         "scanAvg": 515,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 443,
+        "cheapestDate": 1788926400,
+        "scanAvg": 522,
+        "dataPoints": 61
       }
     ],
     "January 2027": [
@@ -4599,6 +4718,13 @@
         "cheapestDate": 1788235200,
         "scanAvg": 730,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 550,
+        "cheapestDate": 1788235200,
+        "scanAvg": 720,
+        "dataPoints": 61
       }
     ],
     "February 2027": [
@@ -4650,6 +4776,13 @@
         "cheapestDate": 1786593600,
         "scanAvg": 651,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 545,
+        "cheapestDate": 1786593600,
+        "scanAvg": 661,
+        "dataPoints": 61
       }
     ],
     "March 2027": [
@@ -4665,6 +4798,13 @@
         "latestPrice": 503,
         "cheapestDate": 1786507200,
         "scanAvg": 647,
+        "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 503,
+        "cheapestDate": 1786507200,
+        "scanAvg": 663,
         "dataPoints": 61
       }
     ]
@@ -5060,13 +5200,6 @@
     ],
     "October 2026": [
       {
-        "scanDate": "2026-05-04",
-        "latestPrice": 585,
-        "cheapestDate": 1772859600,
-        "scanAvg": 646,
-        "dataPoints": 62
-      },
-      {
         "scanDate": "2026-05-11",
         "latestPrice": 572,
         "cheapestDate": 1777867200,
@@ -5198,16 +5331,16 @@
         "cheapestDate": 1786420800,
         "scanAvg": 524,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 433,
+        "cheapestDate": 1786420800,
+        "scanAvg": 548,
+        "dataPoints": 61
       }
     ],
     "November 2026": [
-      {
-        "scanDate": "2026-05-04",
-        "latestPrice": 594,
-        "cheapestDate": 1772859600,
-        "scanAvg": 652,
-        "dataPoints": 62
-      },
       {
         "scanDate": "2026-05-11",
         "latestPrice": 635,
@@ -5340,6 +5473,13 @@
         "cheapestDate": 1785902400,
         "scanAvg": 674,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 610,
+        "cheapestDate": 1785902400,
+        "scanAvg": 674,
+        "dataPoints": 61
       }
     ],
     "December 2026": [
@@ -5454,6 +5594,13 @@
         "cheapestDate": 1789358400,
         "scanAvg": 520,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 431,
+        "cheapestDate": 1789358400,
+        "scanAvg": 512,
+        "dataPoints": 61
       }
     ],
     "January 2027": [
@@ -5533,6 +5680,13 @@
         "cheapestDate": 1788926400,
         "scanAvg": 661,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 555,
+        "cheapestDate": 1789444800,
+        "scanAvg": 647,
+        "dataPoints": 61
       }
     ],
     "February 2027": [
@@ -5584,6 +5738,13 @@
         "cheapestDate": 1786420800,
         "scanAvg": 555,
         "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 440,
+        "cheapestDate": 1786420800,
+        "scanAvg": 542,
+        "dataPoints": 61
       }
     ],
     "March 2027": [
@@ -5599,6 +5760,13 @@
         "latestPrice": 530,
         "cheapestDate": 1785902400,
         "scanAvg": 604,
+        "dataPoints": 61
+      },
+      {
+        "scanDate": "2026-09-21",
+        "latestPrice": 530,
+        "cheapestDate": 1785902400,
+        "scanAvg": 602,
         "dataPoints": 61
       }
     ]
